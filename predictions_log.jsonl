@@ -45,3 +45,31 @@
 {"text": "hey", "prediction": "ham", "probability": 0.40821629762649536, "optimizer": "adam"}
 {"text": "hello there", "prediction": "spam", "probability": 0.9215028285980225, "optimizer": "adam"}
 {"text": "hey this is spam", "prediction": "ham", "probability": 0.05637004226446152, "optimizer": "adam"}
+{"text": "hey wyd", "prediction": "spam", "probability": 0.5382463932037354, "optimizer": "adam"}
+{"text": "hello there", "prediction": "spam", "probability": 0.9716629385948181, "optimizer": "adam"}
+{"text": "hey there\nhey wassup", "prediction": "ham", "probability": 0.21225057542324066, "optimizer": "adam"}
+{"text": "you car's extended warranty", "prediction": "ham", "probability": 0.3691423833370209, "optimizer": "adam"}
+{"text": "Hey wyd", "prediction": "spam", "probability": 0.5382463932037354, "optimizer": "adam"}
+{"text": "Congrats! you just won a free gift card", "prediction": "spam", "probability": 0.986232340335846, "optimizer": "adam"}
+{"text": "Give me your credit card info", "prediction": "spam", "probability": 0.7329303026199341, "optimizer": "adam"}
+{"text": "hey there", "prediction": "ham", "probability": 0.04362122341990471, "optimizer": "adam"}
+{"text": "hello there", "prediction": "spam", "probability": 0.9716629385948181, "optimizer": "adam"}
+{"text": "This is a spam message", "prediction": "ham", "probability": 0.01848141849040985, "optimizer": "adam"}
+{"text": "hey wyd", "prediction": "spam", "probability": 0.5382463932037354, "optimizer": "adam"}
+{"text": "hello there", "prediction": "spam", "probability": 0.9716629385948181, "optimizer": "adam"}
+{"text": "hey there", "prediction": "ham", "probability": 0.04362122341990471, "optimizer": "adam"}
+{"text": "give me your credit card info", "prediction": "spam", "probability": 0.7329303026199341, "optimizer": "adam"}
+{"text": "Congrats. you won a free gift card", "prediction": "spam", "probability": 0.9872029423713684, "optimizer": "adam"}
+{"text": "This is a spam message", "prediction": "ham", "probability": 0.01848141849040985, "optimizer": "adam"}
+{"text": "hello wyd", "prediction": "spam", "probability": 0.7631233930587769, "optimizer": "adam"}
+{"text": "hey there", "prediction": "ham", "probability": 0.04362122341990471, "optimizer": "adam"}
+{"text": "hello there", "prediction": "spam", "probability": 0.9716629385948181, "optimizer": "adam"}
+{"text": "Congrats. You won a free gift card", "prediction": "spam", "probability": 0.9872029423713684, "optimizer": "adam"}
+{"text": "Give me your credit card info", "prediction": "spam", "probability": 0.7329303026199341, "optimizer": "adam"}
+{"text": "This is a spam message", "prediction": "ham", "probability": 0.01848141849040985, "optimizer": "adam"}
+{"text": "wyd", "prediction": "spam", "probability": 0.5370838642120361, "optimizer": "adam"}
+{"text": "hey there", "prediction": "ham", "probability": 0.04362122341990471, "optimizer": "adam"}
+{"text": "hello there", "prediction": "spam", "probability": 0.9716629385948181, "optimizer": "adam"}
+{"text": "give me your credit card info", "prediction": "spam", "probability": 0.7329303026199341, "optimizer": "adam"}
+{"text": "congrats. you won a free credit card", "prediction": "spam", "probability": 0.9933178424835205, "optimizer": "adam"}
+{"text": "This is a spam message", "prediction": "ham", "probability": 0.01848141849040985, "optimizer": "adam"}

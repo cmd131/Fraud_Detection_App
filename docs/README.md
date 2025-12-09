@@ -26,9 +26,10 @@ Use `test_api.py` or the frontend interface to send text messages and view predi
 
 ## Video Links
 
-- **Demo Video**: [Insert demo link here]
-- **Technical Walkthrough**: [Insert walkthrough link here]
-
+- **Demo Video**: https://duke.box.com/s/eftoegkpzyc9hzt69ast6xvn89lqt7ku
+- **Technical Walkthrough**: https://duke.box.com/s/m3zm2ducgi2wcdfrrz2ylvogfy69pprm
+and
+https://duke.box.com/s/uy6x96d2ucfesqub66qo66bax2lzuavb
 ## Evaluation
 
 **Sklearn Baselines:**
