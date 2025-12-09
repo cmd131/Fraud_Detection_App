@@ -38,9 +38,11 @@ Use `test_api.py` or the frontend interface to send text messages and view predi
 **PyTorch MLP Classifier (AdamW):**
 - Test Accuracy: ~0.9565
 - Test F1: ~0.9444
+
 **PyTorch MLP Classifier (Adam):**
 - Test Accuracy: ~0.9601
 - Test F1: ~0.9501
+
 **PyTorch MLP Classifier (SGD):**
 - Test Accuracy: ~0.9430
 - Test F1: ~0.9261
