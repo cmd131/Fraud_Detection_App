@@ -38,3 +38,5 @@
 {"text": "hey wyd", "prediction": "ham", "probability": 0.40821629762649536, "optimizer": "adam"}
 {"text": "hey there", "prediction": "ham", "probability": 0.011593775823712349, "optimizer": "adam"}
 {"text": "hello there", "prediction": "spam", "probability": 0.9215028285980225, "optimizer": "adam"}
+{"text": "hey wyd", "prediction": "ham", "probability": 0.40821629762649536, "optimizer": "adam"}
+{"text": "hello there", "prediction": "spam", "probability": 0.9215028285980225, "optimizer": "adam"}

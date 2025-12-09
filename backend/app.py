@@ -1,6 +1,11 @@
 from flask import Flask
 from flask_cors import CORS
-from routes.text_route import bp as text_bp
+import sys
+import os
+sys.path.append(os.path.join(os.path.dirname(__file__), '..'))  # Adds parent directory to path
+
+from src.routes.text_route import bp as text_bp
+
 
 app = Flask(__name__)
 CORS(app)  # <-- This allows requests from frontend at localhost:3000
