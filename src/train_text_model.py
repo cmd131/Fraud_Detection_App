@@ -11,6 +11,9 @@ from sklearn.linear_model import LogisticRegression
 from sklearn.dummy import DummyClassifier
 from sklearn.metrics import accuracy_score, f1_score, confusion_matrix, classification_report
 from sklearn.utils import shuffle
+import sys
+import os
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 from src.text_preproc import clean_text
 from datasets import load_dataset
 
@@ -29,7 +32,7 @@ SKLEARN_MODEL_FILE = os.path.join(MODEL_DIR, "text_model_sklearn.pkl")
 VECTORIZER_FILE = os.path.join(MODEL_DIR, "tfidf_vectorizer.pkl")
 TORCH_MODEL_FILE = os.path.join(MODEL_DIR, "text_model_torch.pt")
 ERROR_LOG_FILE = os.path.join(MODEL_DIR, "misclassified_examples.csv")
-
+#[TASK 13: Trained model using GPU/TPU/CUDA acceleration, 5 pts]
 device = "cuda" if torch.cuda.is_available() else "cpu"
 print("Device:", device)
 

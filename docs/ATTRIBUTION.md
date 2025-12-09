@@ -69,6 +69,8 @@ AI assistance was used for the following components:
 - All AI-generated code was reviewed, tested, and modified by Caleb Donaldson
 - Code was validated for correctness, security, and alignment with project requirements
 - AI assistance served as a development accelerator, not a replacement for understanding
+- If an entire file was AI-generated, the attribution is at the top of the file
+- If a smaller section of a file was AI-generated, the attrubition follows the comment header of that section within the file
 
 ## References and Learning Resources
 

@@ -1,5 +1,3 @@
-# backend/text_preproc.py
-
 import re
 from typing import List
 

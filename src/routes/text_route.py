@@ -1,11 +1,10 @@
-# backend/routes/text_route.py
 import os
 import json
 import pickle
 import torch
 import torch.nn as nn
 import numpy as np
-from flask import Blueprint, request, jsonify
+from flask import Blueprint, request, jsonify, current_app
 from src.text_preproc import clean_text, text_to_summary_features
 from src.train_text_model import MLPClassifier  # Import your model class
 
@@ -33,7 +32,7 @@ print("Device for inference:", device)
 
 # -----------------------------
 # Logging predictions
-# [TASK 12: Model evaluation & analysis - track predictions for inspection, 5 pts]
+# [TASK 1: Production-grade deployment - logging & error handling, 10 pts]
 # -----------------------------
 def log_prediction(text, prediction, probability, optimizer='adamw'):
     entry = {
@@ -65,8 +64,8 @@ for opt, path in MODEL_FILES.items():
     print(f"Loaded PyTorch model ({opt}) from {path}")
 
 # -----------------------------
-# Prediction route using PyTorch models
-# [TASK 15: Web app deployment]
+# Prediction route
+# [TASK 1: Production-grade deployment - logging & error handling]
 # -----------------------------
 @bp.route("/predict_text", methods=["POST"])
 def predict_text():
@@ -76,52 +75,56 @@ def predict_text():
     Returns:
         { "prediction": "spam" or "ham", "probability": float, "summary_features": {...} }
     """
-    data = request.json or {}
-    text = data.get("text", "")
-    optimizer = data.get("optimizer", "adamw").lower()
-    
-    if not text:
-        return jsonify({"error": "No text provided"}), 400
-    if optimizer not in torch_models:
-        return jsonify({"error": f"Unknown optimizer '{optimizer}'"}), 400
+    try:
+        data = request.json or {}
+        text = data.get("text", "")
+        optimizer = data.get("optimizer", "adamw").lower()
 
-    # -----------------------------
-    # Preprocess text
-    # [TASK 8: Comprehensive preprocessing]
-    # -----------------------------
-    cleaned = clean_text(text)
-    X = vectorizer.transform([cleaned]).toarray().astype(np.float32)
-    X_tensor = torch.from_numpy(X).to(device)
+        if not text:
+            return jsonify({"error": "No text provided"}), 400
+        if optimizer not in torch_models:
+            return jsonify({"error": f"Unknown optimizer '{optimizer}'"}), 400
 
-    # -----------------------------
-    # Predict using selected optimizer model
-    # [TASK 5: Trained model inference, PyTorch]
-    # -----------------------------
-    model = torch_models[optimizer]
-    with torch.no_grad():
-        logits = model(X_tensor)
-        prob = torch.sigmoid(logits).item()
-        pred_label = 'spam' if prob >= 0.5 else 'ham'
+        # -----------------------------
+        # Preprocess text
+        # [TASK 8: Comprehensive preprocessing]
+        # -----------------------------
+        cleaned = clean_text(text)
+        X = vectorizer.transform([cleaned]).toarray().astype(np.float32)
+        X_tensor = torch.from_numpy(X).to(device)
 
-    # -----------------------------
-    # Optional: summary features
-    # [TASK 9: Feature engineering / additional info]
-    # -----------------------------
-    features = text_to_summary_features(text)
+        # -----------------------------
+        # Predict using selected optimizer model
+        # [TASK 5: Trained model inference, PyTorch]
+        # -----------------------------
+        model = torch_models[optimizer]
+        with torch.no_grad():
+            logits = model(X_tensor)
+            prob = torch.sigmoid(logits).item()
+            pred_label = 'spam' if prob >= 0.5 else 'ham'
 
-    # -----------------------------
-    # Log prediction
-    # [TASK 12: Track predictions for evaluation & error analysis]
-    # -----------------------------
-    log_prediction(text, pred_label, prob, optimizer)
+        # -----------------------------
+        # [TASK 9: Feature engineering / additional info]
+        # -----------------------------
+        features = text_to_summary_features(text)
 
-    # -----------------------------
-    # Return JSON response
-    # [TASK 15: Web app deployment]
-    # -----------------------------
-    return jsonify({
-        "prediction": pred_label,
-        "probability": prob,
-        "summary_features": features,
-        "optimizer": optimizer
-    })
+        # -----------------------------
+        # Log prediction
+        # [TASK 1: Production-grade deployment]
+        # -----------------------------
+        log_prediction(text, pred_label, prob, optimizer)
+
+        return jsonify({
+            "prediction": pred_label,
+            "probability": prob,
+            "summary_features": features,
+            "optimizer": optimizer
+        })
+
+    except Exception as e:
+        # -----------------------------
+        # Error handling (production-grade)
+        # [TASK 1: Production-grade deployment]
+        # -----------------------------
+        current_app.logger.error(f"Prediction failed: {e}")
+        return jsonify({"error": "Prediction failed. Check logs for details."}), 500
