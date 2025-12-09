@@ -1,0 +1,111 @@
+#Help from AI-generation by ChatGPT
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Fraud/Spam Detection</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        textarea { width: 100%; padding: 10px; font-size: 16px; }
+        button { margin-top: 10px; padding: 10px 20px; font-size: 16px; cursor: pointer; }
+
+        /* Sticker for latest prediction */
+        #latestPrediction {
+            margin-top: 20px;
+            padding: 12px 20px;
+            font-size: 20px;
+            font-weight: bold;
+            border-radius: 8px;
+            display: none;
+            text-align: center;
+            width: fit-content;
+        }
+        .spam { color: red; background-color: #ffd6d6; border: 1px solid red; }
+        .not-spam { color: green; background-color: #d6ffd6; border: 1px solid green; }
+
+        /* Results table */
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+        th, td { border: 1px solid #ccc; padding: 8px; text-align: left; }
+        th { background-color: #f4f4f4; }
+    </style>
+</head>
+<body>
+    <h1>Fraud/Spam Text Detection</h1>
+
+    <textarea id="message" rows="4" placeholder="Enter a message..."></textarea><br>
+    <button onclick="checkMessage()">Check Message</button>
+
+    <!-- Sticker for latest prediction -->
+    <div id="latestPrediction"></div>
+
+    <!-- Results Table -->
+    <h2>Results:</h2>
+    <table id="resultsTable">
+        <thead>
+            <tr>
+                <th>Message</th>
+                <th>Prediction</th>
+                <th>Probability</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+
+    <script>
+        async function checkMessage() {
+            const textarea = document.getElementById("message");
+            const msg = textarea.value.trim();
+
+            if (!msg) {
+                alert("Please enter a message.");
+                return;
+            }
+
+            try {
+                const response = await fetch("http://127.0.0.1:5000/api/text/predict_text", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ text: msg, optimizer: "adam" })
+                });
+
+                if (!response.ok) {
+                    alert(`Error: ${response.status}`);
+                    return;
+                }
+
+                const data = await response.json();
+
+                const predictionText = data.prediction === 'spam' ? 'Spam' : 'Not Spam';
+                const predictionClass = data.prediction === 'spam' ? 'spam' : 'not-spam';
+
+                // -----------------------------
+                // Show latest prediction sticker (without probability)
+                // -----------------------------
+                const sticker = document.getElementById("latestPrediction");
+                sticker.textContent = predictionText;
+                sticker.className = predictionClass;
+                sticker.style.display = "block";
+
+                // -----------------------------
+                // Prepend row to results table
+                // -----------------------------
+                const tbody = document.querySelector("#resultsTable tbody");
+                const row = document.createElement("tr");
+                row.innerHTML = `
+                    <td>${msg}</td>
+                    <td class="${predictionClass}">${predictionText}</td>
+                    <td>${data.probability.toFixed(3)}</td>
+                `;
+                tbody.prepend(row);  // most recent at top
+
+                // Clear textarea
+                textarea.value = "";
+
+            } catch (err) {
+                console.error("Request failed:", err);
+                alert("Request failed. Check console for details.");
+            }
+        }
+    </script>
+</body>
+</html>
