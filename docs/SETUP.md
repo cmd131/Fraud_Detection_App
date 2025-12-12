@@ -15,7 +15,7 @@ Before you begin, ensure you have the following installed:
 
 ```bash
 # If using Git
-git clone <repository-url>
+git clone <https://github.com/cmd131/Fraud_Detection_App.git>
 cd fraud-spam-detection
 
 # Or download and extract the ZIP file, then navigate to the project directory
